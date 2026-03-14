@@ -80,7 +80,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 .phone-notch{width:48px;height:6px;background:rgba(255,255,255,.15);border-radius:3px;margin:0 auto 12px}
 
 /* Drop zone */
-.phone-screen{height:300px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
+.phone-screen{height:300px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;gap:5px;padding:6px 6px 0 6px;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
 @keyframes pulseBorder{0%,100%{border-color:rgba(59,130,246,.65)}50%{border-color:rgba(59,130,246,1)}}
 .phone-screen.has-items{animation:none;border-color:rgba(59,130,246,.4)}
 .phone-screen.drag-over{border-color:#3B82F6;border-style:solid;background:rgba(59,130,246,.12);animation:none}
@@ -136,7 +136,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 }
 
 /* Dropped pieces */
-.dp{width:100%;animation:dropIn .35s cubic-bezier(.34,1.56,.64,1) forwards}
+.dp{width:100%;flex-shrink:0;animation:dropIn .35s cubic-bezier(.34,1.56,.64,1) forwards}
 @keyframes dropIn{from{opacity:0;transform:scale(.92) translateY(-6px)}to{opacity:1;transform:none}}
 .dp-nav{background:#1a2235;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:6px;border:1px solid rgba(255,255,255,.08);margin-bottom:4px}
 .dp-nav-logo{width:22px;height:4px;background:var(--blue);border-radius:2px}
@@ -153,7 +153,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 .dp-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:7px 8px;display:flex;align-items:center;gap:6px}
 .dp-input-bar{flex:1;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
 .dp-input-btn{width:20px;height:16px;background:var(--blue);border-radius:3px;flex-shrink:0}
-.dp-tabs{background:#111827;padding:8px 6px 6px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;width:100%;}
+.dp-tabs{background:#111827;padding:8px 6px 6px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;width:calc(100% + 12px);margin-left:-6px;margin-top:auto;}
 .dp-tab{display:flex;flex-direction:column;align-items:center;gap:3px}
 .dp-tab-icon{width:14px;height:10px;background:rgba(255,255,255,.2);border-radius:2px}
 .dp-tab-icon.a{background:var(--blue)}
@@ -651,6 +651,57 @@ footer span{color:var(--blue)}
   .ux-option { padding: 14px 16px; gap: 12px; }
   .ux-opt-text { font-size: 13px; }
 }
+
+/* About photo */
+#about { background: var(--navy); padding: 120px 64px; }
+.about-inner {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: start;
+  max-width: 900px;
+}
+.about-photo-col { display: flex; flex-direction: column; gap: 20px; }
+.about-photo {
+  width: 200px; height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,.1);
+  position: relative;
+  flex-shrink: 0;
+}
+.about-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(59,130,246,.25);
+  border-radius: 4px;
+}
+.about-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+  filter: grayscale(15%);
+  transition: filter .4s;
+}
+.about-photo:hover img { filter: grayscale(0%); }
+.about-photo-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 8px;
+}
+.about-photo-tag::before {
+  content: ''; display: block;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+  animation: blink 2s infinite;
+}
+.about-text-col {}
+@media(max-width:900px){
+  #about { padding: 80px 24px; }
+  .about-inner { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo { width: 120px; height: 120px; }
+}
 </style>
 </head>
 <body>
@@ -832,20 +883,27 @@ footer span{color:var(--blue)}
 
 <!-- ABOUT -->
 <section id="about">
-  <div style="max-width:680px">
-    <div class="section-header reveal">
-      <div>
-        <p class="section-label">Who I Am</p>
-        <h2 class="section-title">About</h2>
-      </div>
-      <span class="section-num">03 / 06</span>
+  <div class="section-header reveal" style="border-top-color:rgba(255,255,255,.08);margin-bottom:56px;">
+    <div>
+      <p class="section-label">Who I Am</p>
+      <h2 class="section-title" style="color:#fff;">About</h2>
     </div>
-    <div class="about-body reveal">
-      <p>I'm <strong>Oluwatosin Omolayo</strong>, a UI/UX and mobile app designer based in Nigeria. I design digital products that are research-driven and clear. The kind people actually enjoy using because someone thought carefully about how they work.</p>
-      <p>My background in <strong>History and International Studies</strong> trained me to communicate complex ideas clearly, which feeds directly into how I approach information architecture and user flows. The small decisions matter.</p>
-      <p>Currently interning at <strong>Trueminds Innovations Ltd</strong> while taking on freelance projects on the side. Always looking for interesting problems to work on.</p>
-    </div>
+    <span class="section-num" style="color:rgba(255,255,255,.1);">03 / 06</span>
   </div>
+  <div class="about-inner reveal">
+    <div class="about-photo-col">
+      <div class="about-photo">
+        <img src="profile.jpg" alt="Oluwatosin Omolayo"/>
+      </div>
+      <span class="about-photo-tag">Open to work</span>
+    </div>
+    <div class="about-text-col">
+      <div class="about-body">
+        <p>I'm <strong>Oluwatosin Omolayo</strong>, a UI/UX and mobile app designer based in Nigeria. I design digital products that are research-driven and clear. The kind people actually enjoy using because someone thought carefully about how they work.</p>
+        <p>My background in <strong>History and International Studies</strong> trained me to communicate complex ideas clearly, which feeds directly into how I approach information architecture and user flows. The small decisions matter.</p>
+        <p>Currently interning at <strong>Trueminds Innovations Ltd</strong> while taking on freelance projects on the side. Always looking for interesting problems to work on.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1092,7 +1150,15 @@ footer span{color:var(--blue)}
     pieceEl.classList.add('used');
     if (empty) empty.style.opacity = '0';
     screen.classList.add('has-items');
-    screen.insertAdjacentHTML('beforeend', PIECES[type]);
+
+    // Always insert before tabs so tabs stay at the bottom
+    var existingTabs = screen.querySelector('.dp-tabs');
+    if (existingTabs && type !== 'tabs') {
+      existingTabs.insertAdjacentHTML('beforebegin', PIECES[type]);
+    } else {
+      screen.insertAdjacentHTML('beforeend', PIECES[type]);
+    }
+
     placed++;
     if (placed < TOTAL) {
       setStatus('Build a screen → ' + placed + ' / ' + TOTAL);
