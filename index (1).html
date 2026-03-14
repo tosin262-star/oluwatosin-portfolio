@@ -80,7 +80,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 .phone-notch{width:48px;height:6px;background:rgba(255,255,255,.15);border-radius:3px;margin:0 auto 12px}
 
 /* Drop zone */
-.phone-screen{height:300px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
+.phone-screen{height:300px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;gap:5px;padding:6px 6px 0 6px;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
 @keyframes pulseBorder{0%,100%{border-color:rgba(59,130,246,.65)}50%{border-color:rgba(59,130,246,1)}}
 .phone-screen.has-items{animation:none;border-color:rgba(59,130,246,.4)}
 .phone-screen.drag-over{border-color:#3B82F6;border-style:solid;background:rgba(59,130,246,.12);animation:none}
@@ -136,7 +136,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 }
 
 /* Dropped pieces */
-.dp{width:100%;animation:dropIn .35s cubic-bezier(.34,1.56,.64,1) forwards}
+.dp{width:100%;flex-shrink:0;animation:dropIn .35s cubic-bezier(.34,1.56,.64,1) forwards}
 @keyframes dropIn{from{opacity:0;transform:scale(.92) translateY(-6px)}to{opacity:1;transform:none}}
 .dp-nav{background:#1a2235;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:6px;border:1px solid rgba(255,255,255,.08);margin-bottom:4px}
 .dp-nav-logo{width:22px;height:4px;background:var(--blue);border-radius:2px}
@@ -153,7 +153,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 .dp-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:7px 8px;display:flex;align-items:center;gap:6px}
 .dp-input-bar{flex:1;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
 .dp-input-btn{width:20px;height:16px;background:var(--blue);border-radius:3px;flex-shrink:0}
-.dp-tabs{background:#111827;padding:8px 6px 6px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;width:100%;}
+.dp-tabs{background:#111827;padding:8px 6px 6px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;width:calc(100% + 12px);margin-left:-6px;margin-top:auto;}
 .dp-tab{display:flex;flex-direction:column;align-items:center;gap:3px}
 .dp-tab-icon{width:14px;height:10px;background:rgba(255,255,255,.2);border-radius:2px}
 .dp-tab-icon.a{background:var(--blue)}
@@ -651,6 +651,119 @@ footer span{color:var(--blue)}
   .ux-option { padding: 14px 16px; gap: 12px; }
   .ux-opt-text { font-size: 13px; }
 }
+
+/* About photo */
+#about { background: var(--navy); padding: 120px 64px; }
+.about-inner {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: start;
+  max-width: 900px;
+}
+.about-photo-col { display: flex; flex-direction: column; gap: 20px; }
+.about-photo {
+  width: 200px; height: 260px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,.1);
+  position: relative;
+  flex-shrink: 0;
+}
+.about-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(59,130,246,.25);
+  border-radius: 4px;
+}
+.about-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  display: block;
+  filter: grayscale(15%);
+  transition: filter .4s;
+}
+.about-photo:hover img { filter: grayscale(0%); }
+.about-photo-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 8px;
+}
+.about-photo-tag::before {
+  content: ''; display: block;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+  animation: blink 2s infinite;
+}
+.about-text-col {}
+@media(max-width:900px){
+  #about { padding: 80px 24px; }
+  .about-inner { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo { width: 110px; height: 145px; }
+}
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(248,250,252,.97);
+  backdrop-filter: blur(20px);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 28px;
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: -.01em;
+  transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-menu .mobile-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--navy);
+  font-weight: 300;
+}
+
+@media(max-width:900px){
+  .hamburger { display: flex; }
+  .nav-links { display: none; }
+}
 </style>
 </head>
 <body>
@@ -669,7 +782,20 @@ footer span{color:var(--blue)}
     <li><a href="#contact">Contact</a></li>
     <li><a href="Omolayo_Oluwatosin_Resume.pdf" target="_blank" class="nav-resume">Resume ↗</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#projects" onclick="toggleMenu()">Work</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#experience" onclick="toggleMenu()">Experience</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -681,8 +807,8 @@ footer span{color:var(--blue)}
     <h1 class="hero-name">Crafting<br/><em>digital</em><br/><span class="outline">experiences.</span></h1>
     <p class="hero-desc">I'm Oluwatosin Omolayo, a UI/UX and mobile app designer. I design interfaces that feel intuitive, intentional and easy to use. Based in Nigeria, open to work globally.</p>
     <div class="hero-cta-row">
-      <a href="#projects" class="btn-primary">View Work →</a>
-      <a href="#" class="btn-ghost" id="contactCta">Contact Me →</a>
+      <a href="https://www.behance.net/4RMSKY" target="_blank" class="btn-primary">View Work →</a>
+      <a href="https://www.linkedin.com/in/oluwatosin-omolayo-41843923b" target="_blank" class="btn-ghost">Contact Me →</a>
     </div>
   </div>
 
@@ -832,20 +958,27 @@ footer span{color:var(--blue)}
 
 <!-- ABOUT -->
 <section id="about">
-  <div style="max-width:680px">
-    <div class="section-header reveal">
-      <div>
-        <p class="section-label">Who I Am</p>
-        <h2 class="section-title">About</h2>
-      </div>
-      <span class="section-num">03 / 06</span>
+  <div class="section-header reveal" style="border-top-color:rgba(255,255,255,.08);margin-bottom:56px;">
+    <div>
+      <p class="section-label">Who I Am</p>
+      <h2 class="section-title" style="color:#fff;">About</h2>
     </div>
-    <div class="about-body reveal">
-      <p>I'm <strong>Oluwatosin Omolayo</strong>, a UI/UX and mobile app designer based in Nigeria. I design digital products that are research-driven and clear. The kind people actually enjoy using because someone thought carefully about how they work.</p>
-      <p>My background in <strong>History and International Studies</strong> trained me to communicate complex ideas clearly, which feeds directly into how I approach information architecture and user flows. The small decisions matter.</p>
-      <p>Currently interning at <strong>Trueminds Innovations Ltd</strong> while taking on freelance projects on the side. Always looking for interesting problems to work on.</p>
-    </div>
+    <span class="section-num" style="color:rgba(255,255,255,.1);">03 / 06</span>
   </div>
+  <div class="about-inner reveal">
+    <div class="about-photo-col">
+      <div class="about-photo">
+        <img src="profile.jpg" alt="Oluwatosin Omolayo"/>
+      </div>
+      <span class="about-photo-tag">Open to work</span>
+    </div>
+    <div class="about-text-col">
+      <div class="about-body">
+        <p>I'm <strong>Oluwatosin Omolayo</strong>, a UI/UX and mobile app designer based in Nigeria. I design digital products that are research-driven and clear. The kind people actually enjoy using because someone thought carefully about how they work.</p>
+        <p>My background in <strong>History and International Studies</strong> trained me to communicate complex ideas clearly, which feeds directly into how I approach information architecture and user flows. The small decisions matter.</p>
+        <p>Currently interning at <strong>Trueminds Innovations Ltd</strong> while taking on freelance projects on the side. Always looking for interesting problems to work on.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1002,7 +1135,7 @@ footer span{color:var(--blue)}
   <p>Built with <span>✦</span> intention.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+<script>
   /* Email protection bypass */
   (function() {
     var u = 'tosin262';
@@ -1010,11 +1143,18 @@ footer span{color:var(--blue)}
     var e = u + '@' + d;
     var ml = 'mailto:' + e;
     var ce = document.getElementById('contactEmail');
-    var cc = document.getElementById('contactCta');
     if (ce) { ce.href = ml; }
-    if (cc) { cc.href = ml; }
   })();
-</script><script>
+
+  /* Mobile menu */
+  window.toggleMenu = function() {
+    var h = document.getElementById('hamburger');
+    var m = document.getElementById('mobileMenu');
+    h.classList.toggle('open');
+    m.classList.toggle('open');
+    document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+  };
+
 (function() {
   'use strict';
 
@@ -1092,7 +1232,15 @@ footer span{color:var(--blue)}
     pieceEl.classList.add('used');
     if (empty) empty.style.opacity = '0';
     screen.classList.add('has-items');
-    screen.insertAdjacentHTML('beforeend', PIECES[type]);
+
+    // Always insert before tabs so tabs stay at the bottom
+    var existingTabs = screen.querySelector('.dp-tabs');
+    if (existingTabs && type !== 'tabs') {
+      existingTabs.insertAdjacentHTML('beforebegin', PIECES[type]);
+    } else {
+      screen.insertAdjacentHTML('beforeend', PIECES[type]);
+    }
+
     placed++;
     if (placed < TOTAL) {
       setStatus('Build a screen → ' + placed + ' / ' + TOTAL);
