@@ -172,7 +172,7 @@ section{padding:120px 64px}
 
 /* Image preview */
 .project-img{
-  width:100%;height:260px;
+  width:100%;height:280px;
   overflow:hidden;position:relative;
   background:var(--navy);
   flex-shrink:0;
@@ -211,9 +211,7 @@ section{padding:120px 64px}
 .card-top-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),rgba(59,130,246,.4));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.77,0,.18,1);z-index:3}
 .project-card:hover .card-top-line{transform:scaleX(1)}
 .project-card>*:not(.card-top-line){position:relative;z-index:2}
-.project-card.featured{grid-column:1/-1}
-.project-card.featured .project-img{height:360px}
-.project-card.featured .project-title{font-size:clamp(28px,3.5vw,44px)}
+
 .project-index{font-family:var(--serif);font-size:11px;font-style:italic;color:var(--muted)}
 .project-top{display:flex;justify-content:space-between;align-items:flex-start}
 .project-type{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:color .4s}
@@ -300,9 +298,8 @@ section{padding:120px 64px}
 /* CONTACT */
 #contact{background:var(--bg);text-align:center;padding:140px 64px}
 .contact-top{border-top:1px solid var(--border);padding-top:20px;margin-bottom:56px}
-.contact-email{display:inline-block;font-family:var(--serif);font-size:clamp(26px,3.5vw,52px);font-weight:400;font-style:italic;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:8px;transition:color .3s,border-color .3s}
-.contact-email:hover{color:var(--blue);border-color:var(--blue)}
-.contact-socials{display:flex;align-items:center;justify-content:center;gap:48px;margin-top:60px;list-style:none}
+
+.contact-socials{display:flex;align-items:center;justify-content:center;gap:48px;margin-top:0;list-style:none}
 .contact-socials a{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
 .contact-socials a:hover{color:var(--blue)}
 
@@ -335,9 +332,7 @@ footer span{color:var(--blue)}
   .hero-scroll{display:none}
   section{padding:80px 24px}
   .projects-grid{grid-template-columns:1fr}
-  .project-card.featured{grid-column:1}
-  .project-card.featured .project-img{height:220px}
-  .project-img{height:200px}
+  .project-img{height:210px}
   .exp-item{grid-template-columns:1fr;gap:16px}
   .exp-left{flex-direction:row;align-items:center;gap:12px}
   .exp-role{font-size:20px}
@@ -643,7 +638,7 @@ footer span{color:var(--blue)}
     <p class="hero-desc">I'm Oluwatosin Omolayo, a UI/UX and mobile app designer. I design interfaces that feel intuitive, intentional and easy to use. Based in Nigeria, open to work globally.</p>
     <div class="hero-cta-row">
       <a href="#projects" class="btn-primary">View Work →</a>
-      <a href="/cdn-cgi/l/email-protection#4f3b203c26217d797d0f28222e2623612c2022" class="btn-ghost">Contact Me →</a>
+      <a href="#" class="btn-ghost" id="contactCta">Contact Me →</a>
     </div>
   </div>
 
@@ -741,7 +736,7 @@ footer span{color:var(--blue)}
     <span class="section-num">01 / 06</span>
   </div>
   <div class="projects-grid">
-    <a href="https://www.behance.net/gallery/243504233/Ascend-Fintech-Mobile-App-UIUX-Case-study" target="_blank" class="project-card featured reveal">
+    <a href="https://www.behance.net/gallery/243504233/Ascend-Fintech-Mobile-App-UIUX-Case-study" target="_blank" class="project-card reveal">
       <div class="card-top-line"></div>
       <div class="project-img">
         <img src="ascend-cover.jpg" alt="Ascend Fintech App"/>
@@ -936,10 +931,8 @@ footer span{color:var(--blue)}
     <p class="section-label">Let's Work Together</p>
     <h2 class="section-title">Get in Touch</h2>
   </div>
-  <div class="reveal">
-    <a href="/cdn-cgi/l/email-protection#81f5eef2e8efb3b7b3c1e6ece0e8edafe2eeec" class="contact-email"><span class="__cf_email__" data-cfemail="3b4f54485255090d097b5c565a525715585456">[email&#160;protected]</span></a>
-  </div>
   <ul class="contact-socials reveal">
+    <li><a href="#" id="contactEmail">Email</a></li>
     <li><a href="https://x.com/4rmsky" target="_blank">X / Twitter</a></li>
     <li><a href="https://www.linkedin.com/in/oluwatosin-omolayo-41843923b" target="_blank">LinkedIn</a></li>
     <li><a href="https://www.behance.net/4RMSKY" target="_blank">Behance</a></li>
@@ -952,7 +945,19 @@ footer span{color:var(--blue)}
   <p>Built with <span>✦</span> intention.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+  /* Email protection bypass */
+  (function() {
+    var u = 'tosin262';
+    var d = 'gmail.com';
+    var e = u + '@' + d;
+    var ml = 'mailto:' + e;
+    var ce = document.getElementById('contactEmail');
+    var cc = document.getElementById('contactCta');
+    if (ce) { ce.href = ml; }
+    if (cc) { cc.href = ml; }
+  })();
+</script><script>
 (function() {
   'use strict';
 
