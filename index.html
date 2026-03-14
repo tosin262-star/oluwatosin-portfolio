@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Oluwatosin Omolayo — UI/UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0F172A;--slate:#1E293B;--blue:#3B82F6;
+  --blue-lo:rgba(59,130,246,0.12);--blue-glow:rgba(59,130,246,0.35);
+  --bg:#F8FAFC;--text:#0B1324;--muted:#64748B;--border:rgba(15,23,42,0.1);
+  --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1.5px solid var(--blue);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.5;transition:width .3s,height .3s,opacity .3s}
+.cursor-ring.hovered{width:54px;height:54px;opacity:1}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:24px 64px;background:rgba(248,250,252,.92);backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom-color:var(--border)}
+.nav-logo{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:.02em}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--navy)}
+.nav-resume{padding:8px 20px!important;border:1.5px solid var(--navy)!important;color:var(--navy)!important;border-radius:2px;transition:background .3s,color .3s!important}
+.nav-resume:hover{background:var(--navy)!important;color:#fff!important}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:0 64px;background:var(--navy);position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,.25) 0%,transparent 70%);top:-100px;right:-80px;animation:floatOrb 8s ease-in-out infinite}
+.orb-2{width:350px;height:350px;background:radial-gradient(circle,rgba(99,102,241,.2) 0%,transparent 70%);bottom:0;left:10%;animation:floatOrb 11s ease-in-out infinite reverse}
+@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-40px) scale(1.08)}}
+
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:80px;padding-right:60px;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:32px;opacity:0;animation:fadeUp .7s .2s forwards}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue-glow);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-name{font-family:var(--serif);font-size:clamp(54px,6.5vw,96px);font-weight:900;line-height:.95;letter-spacing:-.03em;color:#fff;opacity:0;animation:fadeUp .9s .35s forwards}
+.hero-name em{font-style:italic;color:var(--blue)}
+.hero-name .outline{-webkit-text-stroke:1px rgba(255,255,255,.2);color:transparent}
+.hero-desc{margin-top:36px;font-size:15px;line-height:1.8;color:rgba(255,255,255,.45);max-width:400px;opacity:0;animation:fadeUp .9s .5s forwards}
+.hero-cta-row{display:flex;align-items:center;gap:16px;margin-top:52px;opacity:0;animation:fadeUp .9s .65s forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:17px 40px;background:var(--blue);color:#fff;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .3s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,130,246,.45)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:17px 36px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-decoration:none;border:1.5px solid rgba(255,255,255,.35);transition:color .3s,border-color .3s,background .3s}
+.btn-ghost:hover{border-color:var(--blue);background:rgba(59,130,246,.12)}
+
+/* HERO RIGHT — GAME */
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:40px 0}
+.game-wrap{display:flex;gap:24px;align-items:flex-start;opacity:0;animation:fadeIn 1s .5s forwards;position:relative}
+/* Phone glow */
+.game-wrap::before{content:"";position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:620px;height:620px;background:radial-gradient(circle,rgba(59,130,246,.13) 0%,transparent 65%);pointer-events:none;z-index:0;border-radius:50%}
+
+/* Piece tray */
+.piece-tray{display:flex;flex-direction:column;gap:10px;padding-top:8px;position:relative;z-index:1}
+.tray-label{font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px}
+.ui-piece{width:114px;padding:12px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;cursor:grab;user-select:none;touch-action:none;transition:background .2s,border-color .25s,transform .2s,box-shadow .2s,opacity .3s}
+.ui-piece:hover{background:rgba(59,130,246,.2);border-color:#3B82F6;transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,.3);cursor:grab}
+.ui-piece:active{cursor:grabbing;transform:scale(1.04)}
+.ui-piece.used{opacity:.2;pointer-events:none}
+.ui-piece.dragging{opacity:.75;transform:scale(1.06) rotate(1deg);z-index:1000}
+.piece-icon{font-size:18px;margin-bottom:6px;display:block;filter:drop-shadow(0 0 5px rgba(59,130,246,.6))}
+.piece-name{font-size:10px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.95);display:block}
+.piece-desc{font-size:9px;color:rgba(255,255,255,.45);margin-top:3px;display:block}
+
+/* Phone frame */
+.phone-wrap{position:relative;z-index:1}
+.phone-frame{width:184px;background:#080c18;border:2px solid rgba(255,255,255,.2);border-radius:30px;padding:16px 10px 20px;position:relative;min-height:370px;box-shadow:0 0 0 1px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.6),0 0 70px rgba(59,130,246,.14),0 0 140px rgba(59,130,246,.07),inset 0 0 0 1px rgba(255,255,255,.06);transition:box-shadow .4s}
+.phone-frame:hover{box-shadow:0 0 0 1px rgba(0,0,0,.5),0 32px 80px rgba(0,0,0,.7),0 0 90px rgba(59,130,246,.22),0 0 180px rgba(59,130,246,.1),inset 0 0 0 1px rgba(255,255,255,.08)}
+.phone-notch{width:48px;height:6px;background:rgba(255,255,255,.15);border-radius:3px;margin:0 auto 12px}
+
+/* Drop zone */
+.phone-screen{min-height:295px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
+@keyframes pulseBorder{0%,100%{border-color:rgba(59,130,246,.65)}50%{border-color:rgba(59,130,246,1)}}
+.phone-screen.has-items{animation:none;border-color:rgba(59,130,246,.4)}
+.phone-screen.drag-over{border-color:#3B82F6;border-style:solid;background:rgba(59,130,246,.12);animation:none}
+
+/* Empty hint */
+.screen-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;pointer-events:none;transition:opacity .3s}
+.screen-empty .e-icon{font-size:24px;animation:bounceIcon 2s ease-in-out infinite}
+@keyframes bounceIcon{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-6px);opacity:1}}
+.screen-empty .e-text{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;line-height:1.7}
+
+/* Dropped pieces */
+.dp{width:100%;animation:dropIn .35s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes dropIn{from{opacity:0;transform:scale(.88) translateY(-8px)}to{opacity:1;transform:none}}
+.dp-nav{background:#1a2235;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
+.dp-nav-logo{width:22px;height:4px;background:var(--blue);border-radius:2px}
+.dp-nav-links{display:flex;gap:5px}
+.dp-nav-link{width:14px;height:3px;background:rgba(255,255,255,.25);border-radius:1px}
+.dp-hero{background:linear-gradient(135deg,#1e3a5f,#0f172a);padding:14px 10px}
+.dp-hero-h{width:72%;height:7px;background:#fff;border-radius:2px;margin-bottom:6px}
+.dp-hero-s{width:54%;height:4px;background:rgba(255,255,255,.3);border-radius:2px;margin-bottom:10px}
+.dp-hero-btn{width:44px;height:16px;background:var(--blue);border-radius:3px}
+.dp-card{margin:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px}
+.dp-card-img{width:100%;height:32px;background:rgba(59,130,246,.25);border-radius:3px;margin-bottom:6px}
+.dp-card-line{height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px}
+.dp-card-line.s{width:60%}
+.dp-input{margin:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:7px 8px;display:flex;align-items:center;gap:6px}
+.dp-input-bar{flex:1;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
+.dp-input-btn{width:20px;height:16px;background:var(--blue);border-radius:3px;flex-shrink:0}
+.dp-tabs{background:#111827;padding:8px 6px 4px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.06);margin-top:auto}
+.dp-tab{display:flex;flex-direction:column;align-items:center;gap:3px}
+.dp-tab-icon{width:14px;height:10px;background:rgba(255,255,255,.2);border-radius:2px}
+.dp-tab-icon.a{background:var(--blue)}
+.dp-tab-dot{width:3px;height:3px;border-radius:50%;background:var(--blue)}
+
+/* Win overlay */
+.win-overlay{display:none;position:absolute;inset:0;border-radius:28px;background:rgba(8,12,24,.93);flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:22px;z-index:20;animation:fadeIn .4s ease}
+.win-overlay.show{display:flex}
+.win-emoji{font-size:32px}
+.win-title{font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;line-height:1.35}
+.win-sub{font-size:10px;color:rgba(255,255,255,.45);line-height:1.6}
+.win-cta{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:10px 20px;background:var(--blue);color:#fff;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:transform .2s,box-shadow .2s}
+.win-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(59,130,246,.4)}
+.win-retry{font-size:10px;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;margin-top:2px}
+.win-retry:hover{color:rgba(255,255,255,.7)}
+
+/* Game status */
+.game-status{text-align:center;margin-top:12px;font-size:11px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.4);transition:color .3s;min-height:18px}
+.game-status.win{color:var(--blue)}
+.game-reset{display:none;margin:6px auto 0;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);background:none;border:none;cursor:pointer;transition:color .3s}
+.game-reset.show{display:block}
+.game-reset:hover{color:var(--blue)}
+
+/* Scroll chevron */
+.hero-scroll{position:absolute;bottom:48px;left:64px;display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);z-index:1;opacity:0;animation:fadeIn 1s 1.2s forwards}
+.scroll-chev{display:flex;flex-direction:column;gap:3px;animation:bounceDown 1.8s ease-in-out infinite}
+.scroll-chev span{display:block;width:10px;height:1px;background:var(--blue)}
+.scroll-chev span:first-child{transform:rotate(45deg) translate(2px,2px)}
+.scroll-chev span:last-child{transform:rotate(-45deg) translate(2px,-2px)}
+@keyframes bounceDown{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(5px);opacity:1}}
+
+/* MARQUEE */
+.marquee-strip{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:13px 0;background:#fff}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 22s linear infinite}
+.marquee-item{display:inline-flex;align-items:center;gap:20px;padding:0 28px;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.marquee-item .sep{color:var(--blue)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+section{padding:120px 64px}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--border);padding-top:20px;margin-bottom:72px}
+.section-label{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.section-title{font-family:var(--serif);font-size:clamp(38px,4vw,60px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:var(--navy)}
+.section-num{font-family:var(--serif);font-size:13px;color:var(--border);font-style:italic}
+
+/* PROJECTS */
+#projects{background:var(--navy)}
+#projects .section-title{color:#fff}
+#projects .section-num{color:rgba(255,255,255,.12)}
+#projects .section-header{border-top-color:rgba(255,255,255,.08)}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.project-card{
+  position:relative;overflow:hidden;text-decoration:none;color:var(--text);
+  display:flex;flex-direction:column;
+  background:var(--bg);border:1px solid var(--border);
+  transition:border-color .4s,transform .35s,box-shadow .4s;
+  padding:0;
+}
+.project-card:hover{border-color:var(--blue);transform:translateY(-6px);box-shadow:0 24px 64px rgba(59,130,246,.18)}
+
+/* Image preview */
+.project-img{
+  width:100%;height:260px;
+  overflow:hidden;position:relative;
+  background:var(--navy);
+  flex-shrink:0;
+}
+.project-img img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  transition:transform .6s cubic-bezier(.25,1,.5,1);
+  display:block;
+}
+.project-card:hover .project-img img{transform:scale(1.04)}
+.project-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom, transparent 40%, rgba(15,23,42,.7) 100%);
+  transition:opacity .4s;
+}
+.project-card:hover .project-img-overlay{opacity:0.5}
+
+/* Arrow badge on image */
+.project-img-badge{
+  position:absolute;top:16px;right:16px;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:#fff;
+  transition:background .3s,transform .3s;
+}
+.project-card:hover .project-img-badge{background:var(--blue);transform:translate(2px,-2px)}
+
+/* Card body */
+.project-body{
+  padding:28px 32px 32px;
+  display:flex;flex-direction:column;gap:12px;
+  flex:1;
+}
+.card-top-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),rgba(59,130,246,.4));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.77,0,.18,1);z-index:3}
+.project-card:hover .card-top-line{transform:scaleX(1)}
+.project-card>*:not(.card-top-line){position:relative;z-index:2}
+.project-card.featured{grid-column:1/-1}
+.project-card.featured .project-img{height:360px}
+.project-card.featured .project-title{font-size:clamp(28px,3.5vw,44px)}
+.project-index{font-family:var(--serif);font-size:11px;font-style:italic;color:var(--muted)}
+.project-top{display:flex;justify-content:space-between;align-items:flex-start}
+.project-type{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:color .4s}
+.project-year{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--muted);transition:color .4s}
+.project-title{font-family:var(--serif);font-size:36px;font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--navy);transition:color .4s}
+.project-desc{font-size:14px;line-height:1.78;color:var(--muted);max-width:440px;transition:color .4s}
+.project-arrow{align-self:flex-end;font-size:26px;line-height:1;color:var(--muted);transition:color .4s,transform .35s}
+
+/* EXPERIENCE */
+#experience{background:var(--bg)}
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:0 48px;
+  padding:52px 0;
+  border-bottom:1px solid var(--border);
+  align-items:start;
+  position:relative;
+}
+.exp-item:first-child{border-top:1px solid var(--border)}
+.exp-item:hover .exp-role{color:var(--blue)}
+.exp-item{transition:background .2s}
+
+.exp-left{display:flex;flex-direction:column;gap:12px;padding-top:4px}
+.exp-period{
+  font-size:11px;font-weight:500;letter-spacing:.04em;
+  color:var(--muted);line-height:1.4;
+}
+.exp-badge{
+  display:inline-flex;align-self:flex-start;
+  padding:4px 10px;border:1px solid var(--border);
+  font-size:9px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);border-radius:2px;
+  width:fit-content;
+}
+.exp-badge.current{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,.06)}
+
+.exp-right{}
+.exp-role{
+  font-family:var(--serif);font-size:26px;font-weight:700;
+  letter-spacing:-.02em;color:var(--navy);margin-bottom:4px;
+  line-height:1.1;transition:color .3s;
+}
+.exp-company{
+  font-size:11px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:20px;
+}
+.exp-desc{font-size:14px;line-height:1.8;color:var(--muted);max-width:560px}
+
+/* ABOUT */
+#about{background:var(--navy);padding:120px 64px}
+#about .section-title{color:#fff}
+#about .section-num{color:rgba(255,255,255,.1)}
+#about .section-header{border-top-color:rgba(255,255,255,.08)}
+.about-body{font-size:15px;line-height:1.9;color:rgba(255,255,255,.45)}
+.about-body p+p{margin-top:20px}
+.about-body strong{color:#fff;font-weight:500}
+.about-right{padding-top:56px}
+.skills-cloud{display:flex;flex-direction:column}
+.skill-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);opacity:0;transform:translateX(16px);transition:opacity .6s ease,transform .6s ease}
+.skill-row:first-child{border-top:1px solid rgba(255,255,255,.07)}
+.skill-row.in-view{opacity:1;transform:none}
+.skill-row:nth-child(1){transition-delay:.05s}
+.skill-row:nth-child(2){transition-delay:.12s}
+.skill-row:nth-child(3){transition-delay:.19s}
+.skill-row:nth-child(4){transition-delay:.26s}
+.skill-row:nth-child(5){transition-delay:.33s}
+.skill-row:nth-child(6){transition-delay:.40s}
+.skill-row:nth-child(7){transition-delay:.47s}
+.skill-row-name{font-size:14px;font-weight:400;color:rgba(255,255,255,.75);letter-spacing:.01em}
+.skill-row-tag{font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);padding:4px 10px;background:rgba(59,130,246,.1);border-radius:2px}
+
+/* RESUME */
+#resume{background:var(--slate);padding:72px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(255,255,255,.06)}
+.resume-label{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.resume-heading{font-family:var(--serif);font-size:clamp(28px,3vw,44px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em}
+.resume-heading em{font-style:italic;color:rgba(255,255,255,.35)}
+.resume-desc{margin-top:12px;font-size:14px;color:rgba(255,255,255,.35);max-width:480px;line-height:1.7}
+.resume-download{display:inline-flex;align-items:center;gap:12px;padding:17px 36px;border:1.5px solid var(--blue);font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);text-decoration:none;transition:background .3s,color .3s,box-shadow .3s;white-space:nowrap}
+.resume-download:hover{background:var(--blue);color:#fff;box-shadow:0 8px 32px rgba(59,130,246,.4)}
+.resume-download svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0}
+
+/* CONTACT */
+#contact{background:var(--bg);text-align:center;padding:140px 64px}
+.contact-top{border-top:1px solid var(--border);padding-top:20px;margin-bottom:56px}
+.contact-email{display:inline-block;font-family:var(--serif);font-size:clamp(26px,3.5vw,52px);font-weight:400;font-style:italic;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:8px;transition:color .3s,border-color .3s}
+.contact-email:hover{color:var(--blue);border-color:var(--blue)}
+.contact-socials{display:flex;align-items:center;justify-content:center;gap:48px;margin-top:60px;list-style:none}
+.contact-socials a{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.contact-socials a:hover{color:var(--blue)}
+
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:28px 64px;display:flex;align-items:center;justify-content:space-between}
+footer p{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.06em}
+footer span{color:var(--blue)}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in-view{opacity:1;transform:none}
+.reveal-d1{transition-delay:.15s}
+.reveal-d2{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .cursor,.cursor-ring{display:none}
+  body{cursor:auto}
+  nav{padding:20px 24px}
+  .nav-links{gap:18px}
+  .nav-resume{display:none}
+  #hero{grid-template-columns:1fr;padding:0 24px 60px;min-height:auto}
+  .hero-left{padding-right:0;padding-top:100px;padding-bottom:32px}
+  .hero-right{padding-bottom:48px}
+  .game-wrap{transform:scale(.86);transform-origin:top center;gap:16px}
+  .hero-scroll{display:none}
+  section{padding:80px 24px}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-column:1}
+  .project-card.featured .project-img{height:220px}
+  .project-img{height:200px}
+  .exp-item{grid-template-columns:1fr;gap:16px}
+  .exp-left{flex-direction:row;align-items:center;gap:12px}
+  .exp-role{font-size:20px}
+  #about{grid-template-columns:1fr;gap:48px}
+  .about-right{padding-top:0}
+  #resume{flex-direction:column;align-items:flex-start;padding:60px 24px}
+  #contact{padding:100px 24px}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:24px}
+}
+
+/* UX CHALLENGE GAME */
+#ux-challenge {
+  background: var(--bg);
+  padding: 120px 64px;
+  border-top: 1px solid var(--border);
+}
+#ux-challenge .section-header { margin-bottom: 56px; }
+
+.ux-game-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* Progress bar */
+.ux-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.ux-progress-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-right: 16px;
+  overflow: hidden;
+}
+.ux-progress-fill {
+  height: 100%;
+  background: var(--blue);
+  border-radius: 2px;
+  transition: width .5s cubic-bezier(.25,1,.5,1);
+  width: 0%;
+}
+.ux-progress-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Challenge card */
+.ux-card {
+  background: var(--navy);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 2px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.ux-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), rgba(59,130,246,.3));
+}
+.ux-problem-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.ux-problem-tag .tag-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 8px rgba(59,130,246,.6);
+}
+.ux-question {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  margin-bottom: 36px;
+}
+.ux-scenario {
+  font-size: 13px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.7;
+  margin-top: -24px;
+  margin-bottom: 36px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,.04);
+  border-left: 2px solid var(--blue);
+}
+
+/* Options */
+.ux-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ux-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s;
+  text-align: left;
+  width: 100%;
+  font-family: var(--sans);
+}
+.ux-option:hover:not(:disabled) {
+  background: rgba(59,130,246,.1);
+  border-color: rgba(59,130,246,.4);
+  transform: translateX(4px);
+}
+.ux-option:disabled { cursor: default; }
+.ux-option.correct {
+  background: rgba(16,185,129,.12);
+  border-color: rgba(16,185,129,.5);
+}
+.ux-option.wrong {
+  background: rgba(239,68,68,.08);
+  border-color: rgba(239,68,68,.3);
+}
+.ux-option.reveal-correct {
+  background: rgba(16,185,129,.07);
+  border-color: rgba(16,185,129,.25);
+}
+
+.ux-opt-letter {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; letter-spacing: 0;
+  color: rgba(255,255,255,.5);
+  flex-shrink: 0;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.ux-option.correct   .ux-opt-letter { background: rgba(16,185,129,.3);  border-color: #10b981; color: #10b981; }
+.ux-option.wrong     .ux-opt-letter { background: rgba(239,68,68,.2);   border-color: #ef4444; color: #ef4444; }
+.ux-option.reveal-correct .ux-opt-letter { background: rgba(16,185,129,.15); border-color: rgba(16,185,129,.4); color: #10b981; }
+
+.ux-opt-text {
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.5;
+  font-weight: 400;
+  transition: color .2s;
+}
+.ux-option.correct .ux-opt-text,
+.ux-option.reveal-correct .ux-opt-text { color: rgba(255,255,255,.9); }
+.ux-option.wrong   .ux-opt-text   { color: rgba(255,255,255,.45); }
+
+/* Feedback */
+.ux-feedback {
+  display: none;
+  margin-top: 24px;
+  padding: 18px 20px;
+  background: rgba(255,255,255,.04);
+  border-left: 2px solid #10b981;
+  animation: fadeUp .35s ease;
+}
+.ux-feedback.wrong-fb { border-left-color: #ef4444; }
+.ux-feedback.show { display: block; }
+.ux-fb-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: #10b981; margin-bottom: 6px;
+}
+.ux-feedback.wrong-fb .ux-fb-label { color: #ef4444; }
+.ux-fb-text {
+  font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.65;
+}
+
+/* Next / score row */
+.ux-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  min-height: 44px;
+}
+.ux-next-btn {
+  display: none;
+  align-items: center; gap: 8px;
+  padding: 12px 28px;
+  background: var(--blue); color: #fff;
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase;
+  border: none; cursor: pointer; border-radius: 2px;
+  transition: transform .2s, box-shadow .2s;
+}
+.ux-next-btn.show { display: inline-flex; }
+.ux-next-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,.4); }
+.ux-streak {
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.3);
+  letter-spacing: .04em;
+  transition: color .3s;
+}
+.ux-streak.hot { color: #10b981; }
+
+/* Final score card */
+.ux-score-card {
+  display: none;
+  text-align: center;
+  padding: 60px 48px;
+  background: var(--navy);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 2px;
+  animation: fadeIn .5s ease;
+}
+.ux-score-card.show { display: block; }
+.ux-score-emoji { font-size: 48px; margin-bottom: 16px; }
+.ux-score-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700; color: #fff;
+  letter-spacing: -.02em; margin-bottom: 8px;
+}
+.ux-score-sub {
+  font-size: 14px; color: rgba(255,255,255,.4);
+  line-height: 1.7; max-width: 420px;
+  margin: 0 auto 32px;
+}
+.ux-score-num {
+  font-family: var(--serif);
+  font-size: 72px; font-weight: 900;
+  color: var(--blue); line-height: 1;
+  margin-bottom: 8px;
+}
+.ux-score-denom {
+  font-size: 13px; color: rgba(255,255,255,.3);
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 36px;
+}
+.ux-retry-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px;
+  border: 1.5px solid var(--blue);
+  color: var(--blue); background: none;
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer; transition: background .3s, color .3s;
+}
+.ux-retry-btn:hover { background: var(--blue); color: #fff; }
+
+@media(max-width:900px){
+  #ux-challenge { padding: 80px 24px; }
+  .ux-card { padding: 28px 22px; }
+  .ux-question { font-size: 18px; }
+  .ux-option { padding: 14px 16px; gap: 12px; }
+  .ux-opt-text { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Oluwatosin<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="Omolayo_Oluwatosin_Resume.pdf" target="_blank" class="nav-resume">Resume ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="hero-left">
+    <p class="hero-eyebrow"><span class="eyebrow-dot"></span>UI/UX Design · Mobile App Design</p>
+    <h1 class="hero-name">Crafting<br/><em>digital</em><br/><span class="outline">experiences.</span></h1>
+    <p class="hero-desc">I'm Oluwatosin Omolayo, a UI/UX and mobile app designer. I design interfaces that feel intuitive, intentional and easy to use. Based in Nigeria, open to work globally.</p>
+    <div class="hero-cta-row">
+      <a href="#projects" class="btn-primary">View Work →</a>
+      <a href="/cdn-cgi/l/email-protection#4f3b203c26217d797d0f28222e2623612c2022" class="btn-ghost">Contact Me →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="game-wrap" id="gameWrap">
+      <!-- Piece tray -->
+      <div class="piece-tray">
+        <span class="tray-label">UI Components</span>
+        <div class="ui-piece" id="p-nav" draggable="true" data-piece="nav">
+          <span class="piece-icon">▬</span>
+          <span class="piece-name">Nav Bar</span>
+          <span class="piece-desc">Top navigation</span>
+        </div>
+        <div class="ui-piece" id="p-hero" draggable="true" data-piece="hero">
+          <span class="piece-icon">◈</span>
+          <span class="piece-name">Hero Block</span>
+          <span class="piece-desc">Header + CTA</span>
+        </div>
+        <div class="ui-piece" id="p-card" draggable="true" data-piece="card">
+          <span class="piece-icon">▭</span>
+          <span class="piece-name">Content Card</span>
+          <span class="piece-desc">Image + text</span>
+        </div>
+        <div class="ui-piece" id="p-input" draggable="true" data-piece="input">
+          <span class="piece-icon">⌨</span>
+          <span class="piece-name">Input Field</span>
+          <span class="piece-desc">Search / form</span>
+        </div>
+        <div class="ui-piece" id="p-tabs" draggable="true" data-piece="tabs">
+          <span class="piece-icon">⊟</span>
+          <span class="piece-name">Tab Bar</span>
+          <span class="piece-desc">Bottom nav</span>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="phone-wrap">
+        <div class="phone-frame" id="phoneFrame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" id="phoneScreen">
+            <div class="screen-empty" id="screenEmpty">
+              <span class="e-icon">📱</span>
+              <span class="e-text">Drag components<br/>to build a screen</span>
+            </div>
+          </div>
+          <div class="win-overlay" id="winOverlay">
+            <span class="win-emoji">👏</span>
+            <div class="win-title">Nice! You just built<br/>a screen.</div>
+            <div class="win-sub">This is exactly how<br/>I design products.</div>
+            <a href="https://www.behance.net/4RMSKY" target="_blank" class="win-cta">See my real projects ↗</a>
+            <button class="win-retry" onclick="resetGame()">↺ Try again</button>
+          </div>
+        </div>
+        <div class="game-status" id="gameStatus">Build a screen → 0 / 5</div>
+        <button class="game-reset" id="gameReset" onclick="resetGame()">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-chev"><span></span><span></span></div>
+    Scroll
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">UI/UX Design <span class="sep">✦</span></span>
+    <span class="marquee-item">Mobile App Design <span class="sep">✦</span></span>
+    <span class="marquee-item">Figma Prototyping <span class="sep">✦</span></span>
+    <span class="marquee-item">Design Systems <span class="sep">✦</span></span>
+    <span class="marquee-item">Usability Testing <span class="sep">✦</span></span>
+    <span class="marquee-item">Information Architecture <span class="sep">✦</span></span>
+    <span class="marquee-item">Wireframing <span class="sep">✦</span></span>
+    <span class="marquee-item">Responsive Design <span class="sep">✦</span></span>
+    <span class="marquee-item">UI/UX Design <span class="sep">✦</span></span>
+    <span class="marquee-item">Mobile App Design <span class="sep">✦</span></span>
+    <span class="marquee-item">Figma Prototyping <span class="sep">✦</span></span>
+    <span class="marquee-item">Design Systems <span class="sep">✦</span></span>
+    <span class="marquee-item">Usability Testing <span class="sep">✦</span></span>
+    <span class="marquee-item">Information Architecture <span class="sep">✦</span></span>
+    <span class="marquee-item">Wireframing <span class="sep">✦</span></span>
+    <span class="marquee-item">Responsive Design <span class="sep">✦</span></span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">Case Studies</h2>
+    </div>
+    <span class="section-num">01 / 06</span>
+  </div>
+  <div class="projects-grid">
+    <a href="https://www.behance.net/gallery/243504233/Ascend-Fintech-Mobile-App-UIUX-Case-study" target="_blank" class="project-card featured reveal">
+      <div class="card-top-line"></div>
+      <div class="project-img">
+        <img src="ascend-cover.jpg" alt="Ascend Fintech App"/>
+        <div class="project-img-overlay"></div>
+        <div class="project-img-badge">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-index">001</div>
+        <div class="project-top">
+          <span class="project-type">Fintech · Mobile App · UX Case Study</span>
+          <span class="project-year">2025</span>
+        </div>
+        <h3 class="project-title">Ascend</h3>
+        <p class="project-desc">A fintech mobile app UX case study focused on helping users manage personal finance with clarity and confidence. Research-driven flows, clean visual hierarchy and an onboarding experience built to reduce drop-off from the first screen.</p>
+      </div>
+    </a>
+    <a href="https://www.behance.net/gallery/241188667/Spot-Event-Discovery-App" target="_blank" class="project-card reveal reveal-d1">
+      <div class="card-top-line"></div>
+      <div class="project-img">
+        <img src="spot-cover.jpg" alt="Spot Event Discovery App"/>
+        <div class="project-img-overlay"></div>
+        <div class="project-img-badge">↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-index">002</div>
+        <div class="project-top">
+          <span class="project-type">Social · Event Discovery · Mobile</span>
+          <span class="project-year">2025</span>
+        </div>
+        <h3 class="project-title">Spot</h3>
+        <p class="project-desc">An event discovery app designed around proximity and social signals. Fast browsing, minimal friction. Built for people who decide what to do at the last minute.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div style="max-width:680px">
+    <div class="section-header reveal">
+      <div>
+        <p class="section-label">Who I Am</p>
+        <h2 class="section-title">About</h2>
+      </div>
+      <span class="section-num">03 / 06</span>
+    </div>
+    <div class="about-body reveal">
+      <p>I'm <strong>Oluwatosin Omolayo</strong>, a UI/UX and mobile app designer based in Nigeria. I design digital products that are research-driven and clear. The kind people actually enjoy using because someone thought carefully about how they work.</p>
+      <p>My background in <strong>History and International Studies</strong> trained me to communicate complex ideas clearly, which feeds directly into how I approach information architecture and user flows. The small decisions matter.</p>
+      <p>Currently interning at <strong>Trueminds Innovations Ltd</strong> while taking on freelance projects on the side. Always looking for interesting problems to work on.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label">Where I've Worked</p>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <span class="section-num">04 / 06</span>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-period">Present</div>
+        <div class="exp-badge current">Current</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">UI/UX Design Intern</div>
+        <div class="exp-company">Trueminds Innovations Ltd</div>
+        <p class="exp-desc">Working on web and mobile product interfaces, from early wireframes through to high-fidelity prototypes. Contributing to design systems and collaborating closely with the product team on usability decisions.</p>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-period">Aug 2025<br/>Sep 2025</div>
+        <div class="exp-badge">Internship</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">UI/UX Design Intern</div>
+        <div class="exp-company">PDU Africa &nbsp;·&nbsp; Remote</div>
+        <p class="exp-desc">Worked on web and mobile interfaces focused on improving user engagement. Delivered wireframes, interactive prototypes and visual designs in close collaboration with the product team.</p>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-period">Jan 2025<br/>Present</div>
+        <div class="exp-badge">Freelance</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">UI/UX Designer</div>
+        <div class="exp-company">Independent &nbsp;·&nbsp; Remote</div>
+        <p class="exp-desc">Designing web and mobile interfaces for clients, running projects from brief to final delivery. Work spans fintech, event apps and brand identities, always starting from user research before touching a frame.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--navy);padding:80px 64px;">
+  <div class="section-header reveal" style="border-top-color:rgba(255,255,255,.08);margin-bottom:48px;">
+    <div>
+      <p class="section-label">What I Work With</p>
+      <h2 class="section-title" style="color:#fff;">Skills</h2>
+    </div>
+    <span class="section-num" style="color:rgba(255,255,255,.1);">05 / 06</span>
+  </div>
+  <div class="skills-cloud" style="max-width:600px;">
+    <div class="skill-row"><span class="skill-row-name">User Experience Design</span><span class="skill-row-tag">Core</span></div>
+    <div class="skill-row"><span class="skill-row-name">Wireframing &amp; Prototyping</span><span class="skill-row-tag">Core</span></div>
+    <div class="skill-row"><span class="skill-row-name">Figma / FigJam</span><span class="skill-row-tag">Tool</span></div>
+    <div class="skill-row"><span class="skill-row-name">Canva</span><span class="skill-row-tag">Tool</span></div>
+    <div class="skill-row"><span class="skill-row-name">Design Systems</span><span class="skill-row-tag">Core</span></div>
+    <div class="skill-row"><span class="skill-row-name">Information Architecture</span><span class="skill-row-tag">Core</span></div>
+    <div class="skill-row"><span class="skill-row-name">Usability Testing</span><span class="skill-row-tag">Research</span></div>
+  </div>
+</section>
+
+<!-- UX CHALLENGE -->
+<section id="ux-challenge">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-label">Think Like a Designer</p>
+      <h2 class="section-title">How would you solve this?</h2>
+    </div>
+    <span class="section-num">★ Interactive</span>
+  </div>
+
+  <div class="ux-game-wrap reveal">
+
+    <!-- Progress -->
+    <div class="ux-progress-row">
+      <div class="ux-progress-track">
+        <div class="ux-progress-fill" id="uxProgress"></div>
+      </div>
+      <span class="ux-progress-label" id="uxProgressLabel">Question 1 of 3</span>
+    </div>
+
+    <!-- Active card -->
+    <div class="ux-card" id="uxCard">
+      <div class="ux-problem-tag"><span class="tag-dot"></span><span id="uxTag">UX Problem</span></div>
+      <h3 class="ux-question" id="uxQuestion"></h3>
+      <div class="ux-scenario" id="uxScenario"></div>
+      <div class="ux-options" id="uxOptions"></div>
+      <div class="ux-feedback" id="uxFeedback">
+        <div class="ux-fb-label" id="uxFbLabel"></div>
+        <div class="ux-fb-text" id="uxFbText"></div>
+      </div>
+      <div class="ux-action-row">
+        <span class="ux-streak" id="uxStreak"></span>
+        <button class="ux-next-btn" id="uxNextBtn" onclick="uxNext()">Next question →</button>
+      </div>
+    </div>
+
+    <!-- Score card (hidden until end) -->
+    <div class="ux-score-card" id="uxScoreCard">
+      <div class="ux-score-emoji" id="uxScoreEmoji"></div>
+      <div class="ux-score-num" id="uxScoreNum"></div>
+      <div class="ux-score-denom" id="uxScoreDenom"></div>
+      <div class="ux-score-title" id="uxScoreTitle"></div>
+      <div class="ux-score-sub" id="uxScoreSub"></div>
+      <button class="ux-retry-btn" onclick="uxRestart()">↺ Try again</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESUME -->
+<div id="resume" class="reveal">
+  <div>
+    <p class="resume-label">Full Background</p>
+    <h2 class="resume-heading">View my <em>résumé</em></h2>
+    <p class="resume-desc">Full overview of my experience, education and tools. Download as a PDF.</p>
+  </div>
+  <a href="Omolayo_Oluwatosin_Resume.pdf" target="_blank" class="resume-download">
+    <svg viewBox="0 0 24 24"><path d="M12 3v13M5 16l7 5 7-5M3 21h18"/></svg>
+    Download Resume
+  </a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-top reveal">
+    <p class="section-label">Let's Work Together</p>
+    <h2 class="section-title">Get in Touch</h2>
+  </div>
+  <div class="reveal">
+    <a href="/cdn-cgi/l/email-protection#81f5eef2e8efb3b7b3c1e6ece0e8edafe2eeec" class="contact-email"><span class="__cf_email__" data-cfemail="3b4f54485255090d097b5c565a525715585456">[email&#160;protected]</span></a>
+  </div>
+  <ul class="contact-socials reveal">
+    <li><a href="https://x.com/4rmsky" target="_blank">X / Twitter</a></li>
+    <li><a href="https://www.linkedin.com/in/oluwatosin-omolayo-41843923b" target="_blank">LinkedIn</a></li>
+    <li><a href="https://www.behance.net/4RMSKY" target="_blank">Behance</a></li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Oluwatosin Omolayo</p>
+  <p>Built with <span>✦</span> intention.</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function() {
+  'use strict';
+
+  /* CURSOR */
+  var cur = document.getElementById('cursor');
+  var ring = document.getElementById('cursorRing');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+  document.querySelectorAll('a,button').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { ring.classList.add('hovered'); });
+    el.addEventListener('mouseleave', function() { ring.classList.remove('hovered'); });
+  });
+  (function tick() {
+    if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+    requestAnimationFrame(tick);
+  })();
+
+  /* NAV */
+  var nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* SCROLL REVEAL */
+  var revObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in-view'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .skill-row').forEach(function(el) {
+    revObs.observe(el);
+  });
+
+  /* PARALLAX ORBS */
+  document.addEventListener('mousemove', function(e) {
+    var cx = (e.clientX / window.innerWidth - 0.5) * 30;
+    var cy = (e.clientY / window.innerHeight - 0.5) * 30;
+    document.querySelectorAll('.orb').forEach(function(orb, i) {
+      var d = (i + 1) * 0.5;
+      orb.style.transform = 'translate(' + (cx * d) + 'px,' + (cy * d) + 'px)';
+    });
+  });
+
+  /* ── PHONE BUILDER GAME ── */
+  var PIECES = {
+    nav:   '<div class="dp dp-nav"><div class="dp-nav-logo"></div><div class="dp-nav-links"><div class="dp-nav-link"></div><div class="dp-nav-link"></div><div class="dp-nav-link"></div></div></div>',
+    hero:  '<div class="dp dp-hero"><div class="dp-hero-h"></div><div class="dp-hero-s"></div><div class="dp-hero-btn"></div></div>',
+    card:  '<div class="dp dp-card"><div class="dp-card-img"></div><div class="dp-card-line"></div><div class="dp-card-line s"></div></div>',
+    input: '<div class="dp dp-input"><div class="dp-input-bar"></div><div class="dp-input-btn"></div></div>',
+    tabs:  '<div class="dp dp-tabs"><div class="dp-tab"><div class="dp-tab-icon a"></div><div class="dp-tab-dot"></div></div><div class="dp-tab"><div class="dp-tab-icon"></div></div><div class="dp-tab"><div class="dp-tab-icon"></div></div><div class="dp-tab"><div class="dp-tab-icon"></div></div></div>'
+  };
+  var TOTAL = Object.keys(PIECES).length;
+  var placed = 0;
+  var dragging = null;
+  var ghost = null;
+  var isTouchDrag = false;
+
+  var screen   = document.getElementById('phoneScreen');
+  var empty    = document.getElementById('screenEmpty');
+  var statusEl = document.getElementById('gameStatus');
+  var resetBtn = document.getElementById('gameReset');
+  var winEl    = document.getElementById('winOverlay');
+
+  function setStatus(txt, win) {
+    statusEl.textContent = txt;
+    statusEl.classList.toggle('win', !!win);
+  }
+
+  function dropPiece(type) {
+    if (!type || !PIECES[type]) return;
+    var pieceEl = document.getElementById('p-' + type);
+    if (!pieceEl || pieceEl.classList.contains('used')) return;
+    pieceEl.classList.add('used');
+    if (empty) empty.style.opacity = '0';
+    screen.classList.add('has-items');
+    screen.insertAdjacentHTML('beforeend', PIECES[type]);
+    placed++;
+    if (placed < TOTAL) {
+      setStatus('Build a screen → ' + placed + ' / ' + TOTAL);
+      resetBtn.classList.add('show');
+    } else {
+      setStatus('');
+      setTimeout(function() { if (winEl) winEl.classList.add('show'); }, 350);
+    }
+  }
+
+  window.resetGame = function() {
+    placed = 0;
+    dragging = null;
+    if (winEl) winEl.classList.remove('show');
+    screen.innerHTML = '';
+    screen.appendChild(empty);
+    screen.classList.remove('has-items');
+    if (empty) empty.style.opacity = '1';
+    document.querySelectorAll('.ui-piece').forEach(function(el) { el.classList.remove('used'); });
+    setStatus('Build a screen → 0 / ' + TOTAL);
+    resetBtn.classList.remove('show');
+  };
+
+  /* Desktop drag */
+  document.querySelectorAll('.ui-piece').forEach(function(el) {
+    el.addEventListener('dragstart', function(e) {
+      dragging = el.dataset.piece;
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'copy';
+      if (ring) ring.style.opacity = '0';
+    });
+    el.addEventListener('dragend', function() {
+      el.classList.remove('dragging');
+      if (ring) ring.style.opacity = '0.5';
+    });
+  });
+  screen.addEventListener('dragover', function(e) { e.preventDefault(); screen.classList.add('drag-over'); });
+  screen.addEventListener('dragleave', function() { screen.classList.remove('drag-over'); });
+  screen.addEventListener('drop', function(e) {
+    e.preventDefault();
+    screen.classList.remove('drag-over');
+    dropPiece(dragging);
+    dragging = null;
+  });
+
+  /* Touch drag */
+  document.querySelectorAll('.ui-piece').forEach(function(el) {
+    el.addEventListener('touchstart', function(e) {
+      if (el.classList.contains('used')) return;
+      isTouchDrag = true;
+      dragging = el.dataset.piece;
+      var rect = el.getBoundingClientRect();
+      ghost = el.cloneNode(true);
+      ghost.style.cssText = 'position:fixed;pointer-events:none;z-index:9999;width:' + rect.width + 'px;opacity:.85;border-radius:8px;background:rgba(59,130,246,.2);border:1px solid rgba(59,130,246,.6);box-shadow:0 12px 32px rgba(0,0,0,.5);transform:scale(1.06) rotate(1.5deg);left:' + rect.left + 'px;top:' + rect.top + 'px';
+      document.body.appendChild(ghost);
+    }, { passive: true });
+
+    el.addEventListener('touchmove', function(e) {
+      if (!isTouchDrag || !ghost) return;
+      e.preventDefault();
+      var t = e.touches[0];
+      var gRect = ghost.getBoundingClientRect();
+      ghost.style.left = (t.clientX - gRect.width / 2) + 'px';
+      ghost.style.top  = (t.clientY - gRect.height / 2) + 'px';
+      var under = document.elementFromPoint(t.clientX, t.clientY);
+      screen.classList.toggle('drag-over', !!(under && (under === screen || screen.contains(under))));
+    }, { passive: false });
+
+    function endTouch(e) {
+      if (!isTouchDrag) return;
+      isTouchDrag = false;
+      if (ghost) { ghost.remove(); ghost = null; }
+      screen.classList.remove('drag-over');
+      var t = (e.changedTouches || e.touches)[0];
+      if (t) {
+        var under = document.elementFromPoint(t.clientX, t.clientY);
+        if (under && (under === screen || screen.contains(under))) { dropPiece(dragging); }
+      }
+      dragging = null;
+    }
+    el.addEventListener('touchend', endTouch, { passive: true });
+    el.addEventListener('touchcancel', endTouch, { passive: true });
+  });
+
+})();
+
+/* ── UX CHALLENGE GAME ── */
+var UX_QS = [
+  {
+    tag: "UX Thinking",
+    q: "A checkout form has 12 fields and users are dropping off. What do you fix first?",
+    scenario: "An e-commerce app sees 68% drop-off on its checkout screen. Analytics show users leave midway through the form.",
+    options: [
+      { text: "Reduce to only essential fields and use smart defaults for the rest", correct: true },
+      { text: "Add a progress bar so users know how far they are", correct: false },
+      { text: "Break it into two columns so it looks shorter", correct: false },
+      { text: "Add autofill support across all fields", correct: false }
+    ],
+    feedback: "Reducing fields is always the first move. Every extra field is friction. Autofill and progress bars are useful but they don't fix a bloated form at the root.",
+    wrongFeedback: "Good instinct, but the root problem is the number of fields. Strip it down first, then layer in helpers like autofill or progress."
+  },
+  {
+    tag: "Usability",
+    q: "Users keep tapping the wrong button in a mobile app. What is the most likely cause?",
+    scenario: "Support logs show users frequently trigger the wrong action on a screen with two side-by-side buttons. The buttons look visually distinct.",
+    options: [
+      { text: "The buttons are too close together and below the minimum touch target size", correct: true },
+      { text: "The button labels are confusing and need better copy", correct: false },
+      { text: "Users need a tooltip to explain what each button does", correct: false },
+      { text: "The screen needs an undo option", correct: false }
+    ],
+    feedback: "Touch targets below 44x44px and buttons spaced less than 8px apart are the most common cause of mis-taps on mobile. Visual distinction doesn't help when fingers are imprecise.",
+    wrongFeedback: "Copy and tooltips can help, but the physical problem comes first. If the tap area is too small or buttons are too close, users will keep missing regardless of labels."
+  },
+  {
+    tag: "Design Decisions",
+    q: "You have two design directions. One tests better with users. The other aligns with the brand. Which do you ship?",
+    scenario: "Usability tests show design A reduces task time by 30%. Design B matches the existing brand guidelines perfectly. Stakeholders prefer B.",
+    options: [
+      { text: "Ship A, but document why and propose updating the brand guidelines to match", correct: true },
+      { text: "Ship B because brand consistency is more important long term", correct: false },
+      { text: "Split test both in production and decide after", correct: false },
+      { text: "Merge the two designs into a single compromise", correct: false }
+    ],
+    feedback: "User performance data is the strongest argument in product design. Shipping A with a clear rationale opens the conversation to evolve the brand. A 30% improvement is hard to ignore.",
+    wrongFeedback: "Brand consistency matters, but it should serve the user experience, not override it. The better move is to ship what works and bring the brand along with evidence."
+  }
+]
+var uxIdx = 0, uxScore = 0, uxDone = false;
+
+function uxRender() {
+  var q = UX_QS[uxIdx];
+  document.getElementById('uxTag').textContent = q.tag;
+  document.getElementById('uxQuestion').textContent = q.q;
+  document.getElementById('uxScenario').textContent = q.scenario;
+  document.getElementById('uxProgressLabel').textContent = 'Question ' + (uxIdx+1) + ' of ' + UX_QS.length;
+  document.getElementById('uxProgress').style.width = ((uxIdx / UX_QS.length) * 100) + '%';
+  var fb = document.getElementById('uxFeedback');
+  fb.classList.remove('show','wrong-fb');
+  document.getElementById('uxNextBtn').classList.remove('show');
+  var streak = document.getElementById('uxStreak');
+  streak.textContent = uxScore > 0 ? uxScore + ' correct so far' : '';
+  streak.classList.toggle('hot', uxScore >= 2);
+  var opts = document.getElementById('uxOptions');
+  opts.innerHTML = '';
+  ['A','B','C','D'].forEach(function(l, i) {
+    var btn = document.createElement('button');
+    btn.className = 'ux-option';
+    btn.innerHTML = '<span class="ux-opt-letter">'+l+'</span><span class="ux-opt-text">'+q.options[i].text+'</span>';
+    (function(opt,el){ el.addEventListener('click', function(){ uxPick(opt.correct, i, q); }); })(q.options[i], btn);
+    opts.appendChild(btn);
+  });
+}
+
+function uxPick(correct, idx, q) {
+  if (uxDone) return;
+  uxDone = true;
+  if (correct) uxScore++;
+  document.querySelectorAll('.ux-option').forEach(function(b, i) {
+    b.disabled = true;
+    if (q.options[i].correct) b.classList.add(correct ? 'correct' : 'reveal-correct');
+  });
+  document.querySelectorAll('.ux-option')[idx].classList.add(correct ? 'correct' : 'wrong');
+  var fb = document.getElementById('uxFeedback');
+  document.getElementById('uxFbLabel').textContent = correct ? 'Correct' : 'Not quite';
+  document.getElementById('uxFbText').textContent = correct ? q.feedback : q.wrongFeedback;
+  if (!correct) fb.classList.add('wrong-fb');
+  fb.classList.add('show');
+  document.getElementById('uxNextBtn').classList.add('show');
+  var s = document.getElementById('uxStreak');
+  s.textContent = uxScore + ' correct so far';
+  s.classList.toggle('hot', uxScore >= 2);
+}
+
+window.uxNext = function() {
+  uxIdx++; uxDone = false;
+  if (uxIdx >= UX_QS.length) { uxFinish(); return; }
+  uxRender();
+};
+
+function uxFinish() {
+  document.getElementById('uxCard').style.display = 'none';
+  var sc = document.getElementById('uxScoreCard');
+  sc.classList.add('show');
+  var t = UX_QS.length, p = uxScore/t;
+  document.getElementById('uxScoreNum').textContent = uxScore;
+  document.getElementById('uxScoreDenom').textContent = 'out of ' + t;
+  document.getElementById('uxProgress').style.width = '100%';
+  document.getElementById('uxProgressLabel').textContent = 'Complete';
+  var e,ti,su;
+  if (p===1){e='🏆';ti='Clean sweep.';su='You nailed every one. This is exactly the thinking that makes a great UX designer.';}
+  else if(p>=.75){e='🎯';ti='Sharp instincts.';su='You got most right. You understand how users think and what slows them down.';}
+  else if(p>=.5){e='💡';ti='Good foundation.';su='Solid UX thinking with room to grow. The ones you missed are worth revisiting.';}
+  else{e='📖';ti='Keep exploring.';su='UX is full of nuance. Read the explanations and give it another go.';}
+  document.getElementById('uxScoreEmoji').textContent = e;
+  document.getElementById('uxScoreTitle').textContent = ti;
+  document.getElementById('uxScoreSub').textContent = su;
+}
+
+window.uxRestart = function() {
+  uxIdx=0; uxScore=0; uxDone=false;
+  document.getElementById('uxScoreCard').classList.remove('show');
+  document.getElementById('uxCard').style.display='';
+  uxRender();
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  uxIdx = 0; uxScore = 0; uxDone = false;
+  if (document.getElementById("uxQuestion")) uxRender();
+});
+</script>
+</body>
+</html>
