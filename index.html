@@ -64,7 +64,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 /* Piece tray */
 .piece-tray{display:flex;flex-direction:column;gap:10px;padding-top:8px;position:relative;z-index:1}
 .tray-label{font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px}
-.ui-piece{width:114px;padding:12px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;cursor:grab;user-select:none;touch-action:none;transition:background .2s,border-color .25s,transform .2s,box-shadow .2s,opacity .3s}
+.ui-piece{width:114px;padding:12px 14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:8px;cursor:grab;user-select:none;touch-action:none;transition:background .2s,border-color .25s,transform .2s,box-shadow .2s,opacity .3s}
 .ui-piece:hover{background:rgba(59,130,246,.2);border-color:#3B82F6;transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,.3);cursor:grab}
 .ui-piece:active{cursor:grabbing;transform:scale(1.04)}
 .ui-piece.used{opacity:.2;pointer-events:none}
@@ -80,7 +80,7 @@ nav.scrolled{border-bottom-color:var(--border)}
 .phone-notch{width:48px;height:6px;background:rgba(255,255,255,.15);border-radius:3px;margin:0 auto 12px}
 
 /* Drop zone */
-.phone-screen{min-height:295px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
+.phone-screen{height:300px;border-radius:8px;background:rgba(59,130,246,.05);border:1.5px dashed rgba(59,130,246,.65);display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,background .3s,border-style .2s;position:relative;animation:pulseBorder 2.5s ease-in-out infinite}
 @keyframes pulseBorder{0%,100%{border-color:rgba(59,130,246,.65)}50%{border-color:rgba(59,130,246,1)}}
 .phone-screen.has-items{animation:none;border-color:rgba(59,130,246,.4)}
 .phone-screen.drag-over{border-color:#3B82F6;border-style:solid;background:rgba(59,130,246,.12);animation:none}
@@ -91,25 +91,69 @@ nav.scrolled{border-bottom-color:var(--border)}
 @keyframes bounceIcon{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-6px);opacity:1}}
 .screen-empty .e-text{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center;line-height:1.7}
 
+
+.phone-status{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 14px 4px;
+  background:#080c18;
+  flex-shrink:0;
+}
+.status-time{
+  font-size:10px;font-weight:600;color:#fff;letter-spacing:.02em;
+  font-family:var(--sans);
+}
+.status-icons{
+  display:flex;align-items:center;gap:5px;
+}
+.status-signal{display:flex;align-items:flex-end;gap:1px;}
+.status-bar{width:2px;background:#fff;border-radius:1px;}
+.status-bar:nth-child(1){height:4px;}
+.status-bar:nth-child(2){height:6px;}
+.status-bar:nth-child(3){height:8px;}
+.status-bar:nth-child(4){height:10px;}
+.status-wifi{
+  width:10px;height:8px;position:relative;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.status-wifi::before,.status-wifi::after,.status-wifi-dot{
+  position:absolute;border:1.5px solid #fff;border-radius:50%;
+  border-bottom:none;border-left:none;border-right:none;
+}
+.status-wifi::before{width:10px;height:6px;top:0;}
+.status-wifi::after{width:6px;height:4px;top:3px;}
+.status-wifi-dot{width:2px;height:2px;background:#fff;border:none;border-radius:50%;bottom:0;}
+.status-battery{
+  width:16px;height:8px;border:1.5px solid rgba(255,255,255,.7);
+  border-radius:2px;position:relative;
+}
+.status-battery::after{
+  content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);
+  width:2px;height:4px;background:rgba(255,255,255,.5);border-radius:0 1px 1px 0;
+}
+.status-battery-fill{
+  position:absolute;left:1px;top:1px;bottom:1px;
+  width:70%;background:#fff;border-radius:1px;
+}
+
 /* Dropped pieces */
 .dp{width:100%;animation:dropIn .35s cubic-bezier(.34,1.56,.64,1) forwards}
-@keyframes dropIn{from{opacity:0;transform:scale(.88) translateY(-8px)}to{opacity:1;transform:none}}
-.dp-nav{background:#1a2235;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
+@keyframes dropIn{from{opacity:0;transform:scale(.92) translateY(-6px)}to{opacity:1;transform:none}}
+.dp-nav{background:#1a2235;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:6px;border:1px solid rgba(255,255,255,.08);margin-bottom:4px}
 .dp-nav-logo{width:22px;height:4px;background:var(--blue);border-radius:2px}
 .dp-nav-links{display:flex;gap:5px}
 .dp-nav-link{width:14px;height:3px;background:rgba(255,255,255,.25);border-radius:1px}
-.dp-hero{background:linear-gradient(135deg,#1e3a5f,#0f172a);padding:14px 10px}
+.dp-hero{background:linear-gradient(135deg,#1e3a5f,#0f172a);padding:14px 10px;border-radius:6px}
 .dp-hero-h{width:72%;height:7px;background:#fff;border-radius:2px;margin-bottom:6px}
 .dp-hero-s{width:54%;height:4px;background:rgba(255,255,255,.3);border-radius:2px;margin-bottom:10px}
 .dp-hero-btn{width:44px;height:16px;background:var(--blue);border-radius:3px}
-.dp-card{margin:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px}
+.dp-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px}
 .dp-card-img{width:100%;height:32px;background:rgba(59,130,246,.25);border-radius:3px;margin-bottom:6px}
 .dp-card-line{height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin-bottom:4px}
 .dp-card-line.s{width:60%}
-.dp-input{margin:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:7px 8px;display:flex;align-items:center;gap:6px}
+.dp-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:7px 8px;display:flex;align-items:center;gap:6px}
 .dp-input-bar{flex:1;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
 .dp-input-btn{width:20px;height:16px;background:var(--blue);border-radius:3px;flex-shrink:0}
-.dp-tabs{background:#111827;padding:8px 6px 4px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.06);margin-top:auto}
+.dp-tabs{background:#111827;padding:8px 6px 6px;display:flex;justify-content:space-around;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;width:100%;}
 .dp-tab{display:flex;flex-direction:column;align-items:center;gap:3px}
 .dp-tab-icon{width:14px;height:10px;background:rgba(255,255,255,.2);border-radius:2px}
 .dp-tab-icon.a{background:var(--blue)}
@@ -649,28 +693,28 @@ footer span{color:var(--blue)}
         <span class="tray-label">UI Components</span>
         <div class="ui-piece" id="p-nav" draggable="true" data-piece="nav">
           <span class="piece-icon">▬</span>
-          <span class="piece-name">Nav Bar</span>
-          <span class="piece-desc">Top navigation</span>
+          <span class="piece-name">App Bar</span>
+          <span class="piece-desc">Title + back arrow</span>
         </div>
         <div class="ui-piece" id="p-hero" draggable="true" data-piece="hero">
           <span class="piece-icon">◈</span>
-          <span class="piece-name">Hero Block</span>
-          <span class="piece-desc">Header + CTA</span>
+          <span class="piece-name">Hero Banner</span>
+          <span class="piece-desc">Title + CTA</span>
         </div>
         <div class="ui-piece" id="p-card" draggable="true" data-piece="card">
           <span class="piece-icon">▭</span>
-          <span class="piece-name">Content Card</span>
+          <span class="piece-name">Card</span>
           <span class="piece-desc">Image + text</span>
         </div>
         <div class="ui-piece" id="p-input" draggable="true" data-piece="input">
           <span class="piece-icon">⌨</span>
-          <span class="piece-name">Input Field</span>
-          <span class="piece-desc">Search / form</span>
+          <span class="piece-name">Search Bar</span>
+          <span class="piece-desc">Input field</span>
         </div>
         <div class="ui-piece" id="p-tabs" draggable="true" data-piece="tabs">
           <span class="piece-icon">⊟</span>
-          <span class="piece-name">Tab Bar</span>
-          <span class="piece-desc">Bottom nav</span>
+          <span class="piece-name">Navigation Bar</span>
+          <span class="piece-desc">Home · Search · Profile</span>
         </div>
       </div>
 
@@ -678,6 +722,19 @@ footer span{color:var(--blue)}
       <div class="phone-wrap">
         <div class="phone-frame" id="phoneFrame">
           <div class="phone-notch"></div>
+          <div class="phone-status">
+            <span class="status-time">9:41</span>
+            <div class="status-icons">
+              <div class="status-signal">
+                <div class="status-bar"></div>
+                <div class="status-bar"></div>
+                <div class="status-bar"></div>
+                <div class="status-bar"></div>
+              </div>
+              <div class="status-wifi"><div class="status-wifi-dot"></div></div>
+              <div class="status-battery"><div class="status-battery-fill"></div></div>
+            </div>
+          </div>
           <div class="phone-screen" id="phoneScreen">
             <div class="screen-empty" id="screenEmpty">
               <span class="e-icon">📱</span>
@@ -764,7 +821,7 @@ footer span{color:var(--blue)}
         <div class="project-index">002</div>
         <div class="project-top">
           <span class="project-type">Social · Event Discovery · Mobile</span>
-          <span class="project-year">2025</span>
+          <span class="project-year">2024</span>
         </div>
         <h3 class="project-title">Spot</h3>
         <p class="project-desc">An event discovery app designed around proximity and social signals. Fast browsing, minimal friction. Built for people who decide what to do at the last minute.</p>
@@ -1005,7 +1062,7 @@ footer span{color:var(--blue)}
 
   /* ── PHONE BUILDER GAME ── */
   var PIECES = {
-    nav:   '<div class="dp dp-nav"><div class="dp-nav-logo"></div><div class="dp-nav-links"><div class="dp-nav-link"></div><div class="dp-nav-link"></div><div class="dp-nav-link"></div></div></div>',
+    nav:   '<div class="dp dp-nav"><div style="display:flex;align-items:center;gap:6px"><div style="width:6px;height:6px;border-left:2px solid rgba(255,255,255,.5);border-bottom:2px solid rgba(255,255,255,.5);transform:rotate(45deg)"></div><div class="dp-nav-logo"></div></div><div class="dp-nav-links"><div class="dp-nav-link"></div><div class="dp-nav-link" style="width:18px"></div></div></div>',
     hero:  '<div class="dp dp-hero"><div class="dp-hero-h"></div><div class="dp-hero-s"></div><div class="dp-hero-btn"></div></div>',
     card:  '<div class="dp dp-card"><div class="dp-card-img"></div><div class="dp-card-line"></div><div class="dp-card-line s"></div></div>',
     input: '<div class="dp dp-input"><div class="dp-input-bar"></div><div class="dp-input-btn"></div></div>',
